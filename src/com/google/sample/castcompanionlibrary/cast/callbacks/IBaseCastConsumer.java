@@ -16,6 +16,7 @@
 
 package com.google.sample.castcompanionlibrary.cast.callbacks;
 
+import com.google.android.gms.cast.CastDevice;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.sample.castcompanionlibrary.cast.exceptions.OnFailedListener;
 
@@ -76,4 +77,6 @@ public interface IBaseCastConsumer extends OnFailedListener {
      * network issues.
      */
     public void onConnectivityRecovered();
+
+	public void onDeviceSelected(CastDevice device);
 }

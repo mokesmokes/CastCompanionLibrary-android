@@ -228,6 +228,17 @@ public abstract class BaseCastManager implements DeviceSelectionListener, Connec
     @Override
     public void onDeviceSelected(CastDevice device) {
         setDevice(device, mDestroyOnDisconnect);
+        if (null !=  device && null != mBaseCastConsumers) {
+            synchronized (mBaseCastConsumers) {
+                for (IBaseCastConsumer consumer : mBaseCastConsumers) {
+                    try {
+                        consumer.onDeviceSelected(device);
+                    } catch (Exception e) {
+                        LOGE(TAG, "onDeviceSelected: Failed to inform " + consumer, e);
+                    }
+                }
+            }
+        }
     }
 
     /**
